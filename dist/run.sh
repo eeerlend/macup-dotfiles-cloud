@@ -4,22 +4,23 @@
 #### Description: macup module that keeps your dotfiles in sync through cloud drive
 function copy_to_cloud {
   local file=$1
-  local path_to_dotfiles="$HOME"/Library/Mobile\ Documents/com~apple~CloudDocs/.dotfiles
+  local path_to_dotfiles
+  path_to_dotfiles=$(get_path_to_dotfiles)
   local path_to_file
   path_to_file=$(dirname $file)
 
   if [ -f "$HOME/$file" ]; then
-    report_from_package "Copying local file to iCloud, since it doesn't exist in iCloud yet"
+    report_from_package "Copying local file to cloud, since it doesn't exist in cloud yet"
     cp "$HOME/$file" "$path_to_dotfiles/$file"
   else
-    report_from_package "The file $file needs to be added to iCloud!" "yellow"
+    report_from_package "The file $file needs to be added to cloud!" "yellow"
   fi
 }
 
 function get_path_to_dotfiles {
-  if [ "$macup_dotfiles_cloud_type" == "dropbox" ]; then
+  if [ "$macup_dotfiles_cloud_type" = "dropbox" ]; then
     echo "$HOME"/Dropbox/.dotfiles
-  elif [ "$macup_dotfiles_cloud_type" == "icloud" ]; then
+  elif [ "$macup_dotfiles_cloud_type" = "icloud" ]; then
     echo "$HOME"/Library/Mobile\ Documents/com~apple~CloudDocs/.dotfiles
   else
     echo "$HOME"/Library/Mobile\ Documents/com~apple~CloudDocs/.dotfiles
@@ -30,7 +31,8 @@ function hardlink_dotfile {
   local file=$1
   local chmod=$2
   local num_links=0
-  local path_to_dotfiles=$(get_path_to_dotfiles)
+  local path_to_dotfiles
+  path_to_dotfiles=$(get_path_to_dotfiles)
   local path_to_file
   path_to_file=$(dirname $file)
 
@@ -89,7 +91,7 @@ function hardlink_dotfile {
 
 if [ ! -L .dotfiles-in-cloud ]; then
   # Check if .dotfiles exist in cloud drive
-  if [ ! -d $(get_path_to_dotfiles) ]; then
+  if [ ! -d "$(get_path_to_dotfiles)" ]; then
     report_from_package "Creating .dotfiles directory in cloud drive"
     mkdir $(get_path_to_dotfiles)
   else
@@ -102,13 +104,13 @@ fi
 
 # todo: check if array is declared up front!
 # shellcheck disable=SC2154
-if [ ${#macup_dotfiles_cloud[@]} -eq 0 ]; then
-  report_from_package "No dotfiles to install. Addd files to the \$macup_dotfiles_cloud array" "yellow"
+if [ ${#macup_dotfiles_cloud_files[@]} -eq 0 ]; then
+  report_from_package "No dotfiles to install. Addd files to the \$macup_dotfiles_cloud_files array" "yellow"
 fi
 
-for ((i=0; i<${#macup_dotfiles_cloud[@]}; ++i)); do
-  file="$(echo "${macup_dotfiles_cloud[i]}" | cut -d':' -f1)"
-  chmod="$(echo "${macup_dotfiles_cloud[i]}" | cut -d':' -f2)"
+for ((i=0; i<${#macup_dotfiles_cloud_files[@]}; ++i)); do
+  file="$(echo "${macup_dotfiles_cloud_files[i]}" | cut -d':' -f1)"
+  chmod="$(echo "${macup_dotfiles_cloud_files[i]}" | cut -d':' -f2)"
 
   if [ ! -f $(get_path_to_dotfiles)/"$file" ]; then
     copy_to_cloud "$file"
