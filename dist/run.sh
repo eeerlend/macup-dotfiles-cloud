@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#### Package: macup/macup-dotfiles-icloud
-#### Description: macup module that keeps your dotfiles in sync through icloud drive
+#### Package: macup/macup-dotfiles-cloud
+#### Description: macup module that keeps your dotfiles in sync through cloud drive
 function copy_to_cloud {
   local file=$1
   local path_to_dotfiles="$HOME"/Library/Mobile\ Documents/com~apple~CloudDocs/.dotfiles
