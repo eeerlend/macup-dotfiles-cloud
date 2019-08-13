@@ -93,13 +93,13 @@ if [ ! -L .dotfiles-in-cloud ]; then
   # Check if .dotfiles exist in cloud drive
   if [ ! -d "$(get_path_to_dotfiles)" ]; then
     report_from_package "Creating .dotfiles directory in cloud drive"
-    mkdir $(get_path_to_dotfiles)
+    mkdir "$(get_path_to_dotfiles)"
   else
     report_from_package ".dotfiles directory already exist in cloud drive"
   fi
 
   report_from_package "Creating a local symlink to the cloud dotfiles folder (.dotfiles-in-cloud)"
-  ln -s $(get_path_to_dotfiles) .dotfiles-in-cloud
+  ln -s "$(get_path_to_dotfiles)" .dotfiles-in-cloud
 fi
 
 # todo: check if array is declared up front!
@@ -112,7 +112,7 @@ for ((i=0; i<${#macup_dotfiles_cloud_files[@]}; ++i)); do
   file="$(echo "${macup_dotfiles_cloud_files[i]}" | cut -d':' -f1)"
   chmod="$(echo "${macup_dotfiles_cloud_files[i]}" | cut -d':' -f2)"
 
-  if [ ! -f $(get_path_to_dotfiles)/"$file" ]; then
+  if [ ! -f "$(get_path_to_dotfiles)"/"$file" ]; then
     copy_to_cloud "$file"
   fi
   
