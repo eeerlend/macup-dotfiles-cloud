@@ -1,2 +1,2 @@
 let macupPackageHandler = require('macup-builder/packageHandler')
-macupPackageHandler.copyModule('macup-dotfiles-icloud')
+macupPackageHandler.copyModule('macup-dotfiles-cloud')
