@@ -1,7 +1,7 @@
 {
-  "name": "macup-dotfiles-icloud",
+  "name": "macup-dotfiles-cloud",
   "version": "0.0.0",
-  "description": "macup module that keeps your dotfiles in sync through icloud drive",
+  "description": "macup module that keeps your dotfiles in sync through cloud drive",
   "main": "index.js",
   "scripts": {
     "test": "echo \"No test specified\" && exit 0",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eeerlend/macup-dotfiles-icloud.git"
+    "url": "git+https://github.com/eeerlend/macup-dotfiles-cloud.git"
   },
   "keywords": [
     "macup",
@@ -21,7 +21,7 @@
   "author": "Erlend Mongstad",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/eeerlend/macup-dotfiles-icloud/issues"
+    "url": "https://github.com/eeerlend/macup-dotfiles-cloud/issues"
   },
-  "homepage": "https://github.com/eeerlend/macup-dotfiles-icloud#readme"
+  "homepage": "https://github.com/eeerlend/macup-dotfiles-cloud#readme"
 }
