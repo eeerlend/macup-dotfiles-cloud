@@ -17,7 +17,6 @@ function copy_to_cloud {
 }
 
 function get_path_to_dotfiles {
-  if macup_dotfiles_cloud_type
   if [ "$macup_dotfiles_cloud_type" == "dropbox" ]; then
     echo "$HOME"/Dropbox/.dotfiles
   elif [ "$macup_dotfiles_cloud_type" == "icloud" ]; then
