@@ -13,7 +13,7 @@ npm install eeerlend/macup-dotfiles-cloud --save
 Add your dotfiles to your macup configuration file like this...
 
 ```bash
-macup_dotfiles_cloud+=(
+macup_dotfiles_cloud_files+=(
   myfile
   myotherfile:644
   .ssh/config:644
